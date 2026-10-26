@@ -1,0 +1,6 @@
+# 统一换行，避免 Windows 上整文件 diff
+* text=auto eol=lf
+
+# 二进制
+*.safetensors binary
+*.pt binary
