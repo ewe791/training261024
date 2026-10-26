@@ -109,9 +109,12 @@ def judge(sample: dict, parsed: Parsed) -> dict:
 
     out["a1"] = name_ok
     if gold_args:
-        # 工具选错时，其参数不作为该工具的预测参数计入（召回置零）
-        pred_args = parsed.arguments if name_ok else {}
-        out["a2"] = field_f1(pred_args, gold_args)
+        if name_ok:
+            out["a2"] = field_f1(parsed.arguments, gold_args)
+        else:
+            # 工具选错时也必须计入「预测了参数」这一侧：
+            # 原来把 pred 记成 0，会让精确率恒等于 1.0、F1 退化成召回率。
+            out["a2"] = (0, len(parsed.arguments or {}), len(gold_args))
     if cat == "T3":
         out["a4"] = bool(name_ok and args_ok)
     out["correct"] = bool(name_ok and (args_ok if gold_args else True))

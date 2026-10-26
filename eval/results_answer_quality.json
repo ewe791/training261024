@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T09:26:14",
+  "generated_at": "2026-10-26T11:06:17",
   "backend": "local",
   "models": {
     "base": "Qwen2.5-7B-Instruct",
@@ -7,9 +7,9 @@
   },
   "testset": {
     "path": "eval/quality_test.jsonl",
-    "total": 115,
+    "total": 80,
     "by_category": {
-      "B-FACT": 88,
+      "B-FACT": 53,
       "B-MULTI": 14,
       "B-REFUSE": 13
     }
@@ -26,58 +26,58 @@
     "B6": 0.05
   },
   "finetuned": {
-    "B1": 0.875,
-    "B1F": 0.7549,
-    "B2": 0.9115,
-    "B2C": 0.95,
-    "B3": 0.6429,
-    "B4": 0.8203,
-    "B5": 0.3077,
-    "B5M": 0.0769,
-    "B6": 0.1765
+    "B1": 1.0,
+    "B1F": 0.9104,
+    "B2": 0.9144,
+    "B2C": 0.6591,
+    "B3": 0.8929,
+    "B4": 0.9055,
+    "B5": 0.0,
+    "B5M": 0.0,
+    "B6": 0.1642
   },
   "meta": {
     "finetuned": {
       "B1_source": "auto_rule",
       "B6_source": "auto_rule",
       "n": {
-        "B1": 56,
-        "B1F": 102,
-        "B2_sentences": 226,
-        "B2C": 40,
+        "B1": 15,
+        "B1F": 67,
+        "B2_sentences": 187,
+        "B2C": 22,
         "B3": 14,
-        "B4": 102,
+        "B4": 67,
         "B5": 13,
         "B5M": 13,
-        "B6": 102
+        "B6": 67
       },
       "over_abstain": 0,
       "refuse_by_type": {
-        "conflict": {
-          "hit": 3,
-          "n": 4
-        },
         "no_recall": {
-          "hit": 1,
-          "n": 6
+          "hit": 0,
+          "n": 3
         },
         "weak_recall": {
+          "hit": 0,
+          "n": 7
+        },
+        "conflict": {
           "hit": 0,
           "n": 3
         }
       },
       "format_by_type": {
         "制度解释": {
-          "hit": 73,
-          "n": 92
+          "hit": 52,
+          "n": 57
         },
         "产品说明": {
           "hit": 2,
-          "n": 4
+          "n": 2
         },
         "操作步骤": {
-          "hit": 0,
-          "n": 4
+          "hit": 5,
+          "n": 6
         },
         "故障处理": {
           "hit": 2,
@@ -85,7 +85,7 @@
         }
       },
       "by_category": {
-        "B-FACT": 88,
+        "B-FACT": 53,
         "B-MULTI": 14,
         "B-REFUSE": 13
       }
@@ -94,65 +94,65 @@
       "B1_source": "auto_rule",
       "B6_source": "auto_rule",
       "n": {
-        "B1": 56,
-        "B1F": 102,
-        "B2_sentences": 300,
-        "B2C": 40,
+        "B1": 15,
+        "B1F": 67,
+        "B2_sentences": 194,
+        "B2C": 22,
         "B3": 14,
-        "B4": 102,
+        "B4": 67,
         "B5": 13,
         "B5M": 13,
-        "B6": 102
+        "B6": 67
       },
       "over_abstain": 0,
       "refuse_by_type": {
-        "conflict": {
-          "hit": 1,
-          "n": 4
-        },
         "no_recall": {
           "hit": 0,
-          "n": 6
+          "n": 3
         },
         "weak_recall": {
+          "hit": 0,
+          "n": 7
+        },
+        "conflict": {
           "hit": 0,
           "n": 3
         }
       },
       "format_by_type": {
         "制度解释": {
-          "hit": 62,
-          "n": 92
+          "hit": 40,
+          "n": 57
         },
         "产品说明": {
           "hit": 0,
-          "n": 4
+          "n": 2
         },
         "操作步骤": {
-          "hit": 1,
-          "n": 4
+          "hit": 4,
+          "n": 6
         },
         "故障处理": {
-          "hit": 0,
+          "hit": 2,
           "n": 2
         }
       },
       "by_category": {
-        "B-FACT": 88,
+        "B-FACT": 53,
         "B-MULTI": 14,
         "B-REFUSE": 13
       }
     }
   },
   "base": {
-    "B1": 0.75,
-    "B1F": 0.6176,
-    "B2": 0.6967,
-    "B2C": 0.5625,
-    "B3": 0.8571,
-    "B4": 0.4379,
-    "B5": 0.0769,
+    "B1": 0.9333,
+    "B1F": 0.6866,
+    "B2": 0.7474,
+    "B2C": 0.6591,
+    "B3": 0.9286,
+    "B4": 0.505,
+    "B5": 0.0,
     "B5M": 0.0,
-    "B6": 0.4706
+    "B6": 0.3731
   }
 }
