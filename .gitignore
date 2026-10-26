@@ -27,3 +27,13 @@ requirements.lock
 .DS_Store
 .vscode/
 .idea/
+
+# ---- 续训状态（体积大，推理不需要）----
+optimizer.pt
+scheduler.pt
+*.pth
+rng_state*
+trainer_state.pt
+
+# 说明：checkpoints/ 下的 LoRA 适配器是要提交的产物；
+# outputs/ 是训练过程目录（含 optimizer.pt 等），整体忽略。
