@@ -29,14 +29,14 @@ pip install -r requirements.txt
 ## 第 2 步：造数据（10 秒，不需要 GPU）
 
 ```bash
-python scripts/build_dataset.py     # 期望：744 + 251 条，且「标签/表述自洽：通过」
-python eval/split_dataset.py        # 期望：train 585/171，test 159/80，覆盖检查通过
+python scripts/build_dataset.py     # 期望：780 + 251 条，且「标签/表述自洽：通过」
+python eval/split_dataset.py        # 期望：train 607/173，test 173/78，覆盖检查通过
 ```
 
 ## 第 3 步：体检 → 训练 → 评测
 
 ```bash
-python train/finetune_lora.py --dry-run   # 期望：样本数 756，截断 0 条
+python train/finetune_lora.py --dry-run   # 期望：样本数 780，截断 0 条
 python train/finetune_lora.py             # 需要 GPU；先配好 .env（见下）
 ```
 
