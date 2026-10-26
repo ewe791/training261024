@@ -1,0 +1,36 @@
+# 本机/小显存预设：Qwen2.5-1.5B-Instruct + LoRA
+#
+# 用途：在 8–12G 显存的笔记本（如 RTX 5060 Laptop 8G）上跑通全链路，
+#       验证数据、协议、评测口径是否成立；7B 交付仍建议上云端 GPU。
+#
+#   python train/finetune_lora.py --config config/lora_sft_1.5b.yaml --dry-run
+#   python train/finetune_lora.py --config config/lora_sft_1.5b.yaml
+#
+# 显存占用估算：权重 3G + 激活 2–3G ≈ 5–6G（batch 1 + 梯度检查点）
+
+base_model: Qwen/Qwen2.5-1.5B-Instruct
+method: lora
+lora_rank: 8
+lora_alpha: 16
+lora_dropout: 0.05
+target_modules: q_proj,k_proj,v_proj,o_proj,gate_proj,up_proj,down_proj
+learning_rate: 1.5e-4
+num_epochs: 3
+batch_size: 1
+grad_accum: 8
+max_length: 1536
+warmup_ratio: 0.03
+lr_scheduler: cosine
+load_in_4bit: false
+
+# 数据（与 7B 预设共用同一份数据）
+train_file: data/train.jsonl
+quality_file: data/quality_train.jsonl
+test_file: eval/test.jsonl
+quality_test_file: eval/quality_test.jsonl
+quality_ratio: 0.25
+
+# 产物
+output_dir: outputs/lora-1.5b-4.1
+logging_steps: 10
+save_steps: 200

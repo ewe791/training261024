@@ -1,0 +1,29 @@
+# 评测与数据构造只依赖标准库（python >= 3.10）
+# 以下依赖仅在「真实训练 / 本地模型推理」时需要
+#
+# ---------------------------------------------------------------------------
+# 重要：torch 必须先单独装，不要用本文件一次性装完。
+#
+# 原因：accelerate 依赖 torch。直接 `pip install -r requirements.txt` 时，
+# pip 会从 PyPI 拉一个 **CPU 版 torch**（Windows 上实测是 xxx+cpu），
+# 装完 torch.cuda.is_available() 直接 False，训练时报 no CUDA。
+#
+# 正确顺序（Windows + RTX 50 系示例，其他卡把 cu128 换成对应版本）：
+#   1) pip install torch --index-url https://download.pytorch.org/whl/cu128
+#      （3.46 GB；官方源慢时换阿里云镜像，见 docs/上云微调实施手册.md 附录 E.2）
+#   2) python -c "import torch;print(torch.cuda.is_available())"   # 必须 True
+#   3) pip install -r requirements.txt
+# ---------------------------------------------------------------------------
+
+# --- 训练 ---
+torch>=2.2
+transformers>=4.44,<5       # 5.x 改了 Trainer / DataCollator 接口，本脚本按 4.x 写
+peft>=0.12
+datasets>=3,<4              # 5.x 需要 huggingface_hub 1.x，与 transformers 4.55 冲突
+accelerate>=0.33
+sentencepiece
+# bitsandbytes>=0.43        # 可选：4bit QLoRA（Windows 已有 0.50+ 的轮子）
+
+# --- 在线模型后端 / 语料采集 ---
+openai>=1.40
+python-dotenv>=1.0

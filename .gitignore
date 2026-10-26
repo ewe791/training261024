@@ -1,0 +1,29 @@
+# ---- 体积大 / 可重建，不进仓库 ----
+# 2.9 GB 基座权重
+models/
+# LoRA adapter、checkpoint、optimizer 状态
+outputs/
+# 中间产物（build_dataset 的第一步输出）
+data/raw/
+# 打包上传用的 tar.gz
+dist/
+
+# ---- 环境与运行期 ----
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+logs/
+requirements.lock
+
+# ---- 本地配置（含绝对路径，换机器就失效）----
+.env
+
+# ---- 内部工作记录，不属于项目内容 ----
+.workbuddy/
+
+# ---- 系统 / 编辑器 ----
+.DS_Store
+.vscode/
+.idea/

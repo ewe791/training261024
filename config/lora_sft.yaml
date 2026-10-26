@@ -1,0 +1,27 @@
+# LoRA SFT 配置（F2 训练脚本读取）
+base_model: Qwen/Qwen2.5-7B-Instruct
+method: lora
+lora_rank: 16
+lora_alpha: 32
+lora_dropout: 0.05
+target_modules: q_proj,k_proj,v_proj,o_proj,gate_proj,up_proj,down_proj
+learning_rate: 2.0e-4
+num_epochs: 3
+batch_size: 2
+grad_accum: 8
+max_length: 2048
+warmup_ratio: 0.03
+lr_scheduler: cosine
+load_in_4bit: false
+
+# 数据
+train_file: data/train.jsonl
+quality_file: data/quality_train.jsonl
+test_file: eval/test.jsonl
+quality_test_file: eval/quality_test.jsonl
+quality_ratio: 0.25
+
+# 产物
+output_dir: outputs/lora-knowledge-agent-4.1
+logging_steps: 10
+save_steps: 200

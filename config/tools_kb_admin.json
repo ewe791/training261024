@@ -1,0 +1,148 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "import_knowledge",
+      "description": "导入一个或多个本地文档（PDF/Markdown/Word/TXT）为知识单元，支持批量。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "file_paths": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "文件路径列表，例如 seed/docs/财务报销制度.md"
+          },
+          "category": {"type": "string", "description": "知识分类，缺省为未分类"}
+        },
+        "required": ["file_paths"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "list_units",
+      "description": "分页查询知识单元，可按关键词、分类、状态筛选。写操作前应先调用本工具确认目标单元。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "keyword": {"type": "string"},
+          "category": {"type": "string"},
+          "status": {"type": "string", "enum": ["active", "archived"]},
+          "page": {"type": "integer", "default": 1},
+          "page_size": {"type": "integer", "default": 10}
+        }
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "get_unit",
+      "description": "查看知识单元详情，包含摘要、正文与已配置的权限列表。",
+      "parameters": {
+        "type": "object",
+        "properties": {"unit_id": {"type": "string"}},
+        "required": ["unit_id"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "update_unit",
+      "description": "更新知识单元的标题、摘要、分类或状态。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "unit_id": {"type": "string"},
+          "title": {"type": "string"},
+          "summary": {"type": "string"},
+          "category": {"type": "string"},
+          "status": {"type": "string", "enum": ["active", "archived"]}
+        },
+        "required": ["unit_id"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "delete_units",
+      "description": "批量删除知识单元（连带切片与权限）。属于高风险写操作。",
+      "parameters": {
+        "type": "object",
+        "properties": {"unit_ids": {"type": "array", "items": {"type": "string"}}},
+        "required": ["unit_ids"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "set_unit_permissions",
+      "description": "为知识单元配置四维数据权限（全量覆盖）。必须先明确对象类型 global/department/role/user 与具体值。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "unit_id": {"type": "string"},
+          "targets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "target_type": {"type": "string", "enum": ["global", "department", "role", "user"]},
+                "target_value": {"type": "string"}
+              },
+              "required": ["target_type"]
+            }
+          }
+        },
+        "required": ["unit_id", "targets"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "list_faq_recommendations",
+      "description": "查看待审核的 FAQ 推荐（由高频问答沉淀），按频次降序。",
+      "parameters": {"type": "object", "properties": {}}
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "review_faq",
+      "description": "审核 FAQ：approve 发布并写入缓存，reject 驳回。属于写操作。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "faq_id": {"type": "string"},
+          "action": {"type": "string", "enum": ["approve", "reject"]},
+          "edited_answer": {"type": "string"}
+        },
+        "required": ["faq_id", "action"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "list_knowledge_gaps",
+      "description": "查看未解决的知识缺口（用户没问出答案的问题），按提问次数降序。",
+      "parameters": {
+        "type": "object",
+        "properties": {"limit": {"type": "integer", "default": 10}}
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "get_dashboard_metrics",
+      "description": "获取运营看板核心指标：访问量、UV、知识单元数、Token 总量、平均响应耗时。",
+      "parameters": {"type": "object", "properties": {}}
+    }
+  }
+]

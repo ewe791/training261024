@@ -1,0 +1,133 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "risk_check",
+      "description": "发起风险检查。必填 event_type、user_id、order_id；返回评分、等级、决策、命中规则。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "event_type": {
+            "type": "string",
+            "enum": ["order_create", "order_pay", "after_sale_apply", "logistics_complaint"]
+          },
+          "user_id": {"type": "string"},
+          "order_id": {"type": "string"}
+        },
+        "required": ["event_type", "user_id", "order_id"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "get_assessment",
+      "description": "查询某次风险评估的详情，包括评分、等级、命中规则明细、特征快照。",
+      "parameters": {
+        "type": "object",
+        "properties": {"assessment_id": {"type": "string"}},
+        "required": ["assessment_id"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "list_rules",
+      "description": "查询风控规则列表，可按状态、关键词、分类筛选。写操作前应先调用本工具确认目标规则。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "keyword": {"type": "string"},
+          "status": {"type": "string", "enum": ["enabled", "disabled"]},
+          "category": {"type": "string"}
+        }
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "toggle_rule",
+      "description": "启用或停用某条风控规则。属于写操作，必须先 list_rules 确认规则名并复述后再调用。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "rule_code": {"type": "string"},
+          "action": {"type": "string", "enum": ["enable", "disable"]}
+        },
+        "required": ["rule_code", "action"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "list_cases",
+      "description": "查询风险案件列表，可按状态、风险等级、user_id 筛选。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "enum": ["pending", "reviewing", "closed"]},
+          "risk_level": {"type": "string", "enum": ["low", "medium", "high"]},
+          "user_id": {"type": "string"}
+        }
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "review_case",
+      "description": "审核风险案件。必须同时提供 review_result 与 review_remark，齐全才可调用。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "case_id": {"type": "string"},
+          "review_result": {"type": "string", "enum": ["pass", "reject"]},
+          "review_remark": {"type": "string"}
+        },
+        "required": ["case_id", "review_result", "review_remark"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "get_user_profile",
+      "description": "查询用户画像：注册时长、历史订单数、退款率、历史风险分、黑名单状态。",
+      "parameters": {
+        "type": "object",
+        "properties": {"user_id": {"type": "string"}},
+        "required": ["user_id"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "get_dashboard",
+      "description": "查询风控看板统计：今日检查量、命中率、建案数、风险等级分布。",
+      "parameters": {
+        "type": "object",
+        "properties": {"range": {"type": "string", "enum": ["today", "yesterday", "7d", "30d"]}}
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "manage_blacklist",
+      "description": "查询、新增、删除黑名单。action=query 仅查询；add/remove 属写操作。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {"type": "string", "enum": ["query", "add", "remove"]},
+          "user_id": {"type": "string"},
+          "reason": {"type": "string"}
+        },
+        "required": ["action"]
+      }
+    }
+  }
+]

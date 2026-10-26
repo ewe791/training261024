@@ -1,0 +1,113 @@
+{
+  "ratio": 0.85,
+  "quality_ratio": 0.7,
+  "seed": 20261023,
+  "tool_calling": {
+    "total": 744,
+    "train": 585,
+    "test": 159,
+    "test_by_category": {
+      "T1": 40,
+      "T2": 32,
+      "T3": 20,
+      "T4": 31,
+      "T5": 20,
+      "T6": 16
+    },
+    "train_by_category": {
+      "T1": 206,
+      "T2": 136,
+      "T3": 40,
+      "T4": 87,
+      "T5": 92,
+      "T6": 24
+    },
+    "test_scenes": 82,
+    "per_category": {
+      "T1": {
+        "total": 246,
+        "test": 40,
+        "train": 206,
+        "test_scenes": 21
+      },
+      "T2": {
+        "total": 168,
+        "test": 32,
+        "train": 136,
+        "test_scenes": 2
+      },
+      "T3": {
+        "total": 60,
+        "test": 20,
+        "train": 40,
+        "test_scenes": 20
+      },
+      "T4": {
+        "total": 118,
+        "test": 31,
+        "train": 87,
+        "test_scenes": 13
+      },
+      "T5": {
+        "total": 112,
+        "test": 20,
+        "train": 92,
+        "test_scenes": 10
+      },
+      "T6": {
+        "total": 40,
+        "test": 16,
+        "train": 24,
+        "test_scenes": 16
+      }
+    }
+  },
+  "quality": {
+    "total": 251,
+    "train": 171,
+    "test": 80,
+    "test_by_category": {
+      "B-FACT": 53,
+      "B-MULTI": 14,
+      "B-REFUSE": 13
+    },
+    "per_category": {
+      "B-FACT": {
+        "total": 169,
+        "test": 53,
+        "train": 116,
+        "test_scenes": 19,
+        "stratified": {
+          "制度解释": 1,
+          "操作步骤": 1,
+          "产品说明": 1,
+          "故障处理": 1
+        }
+      },
+      "B-MULTI": {
+        "total": 40,
+        "test": 14,
+        "train": 26,
+        "test_scenes": 7,
+        "stratified": {
+          "制度解释": 1
+        }
+      },
+      "B-REFUSE": {
+        "total": 42,
+        "test": 13,
+        "train": 29,
+        "test_scenes": 13,
+        "stratified": {
+          "no_recall": 1,
+          "weak_recall": 1,
+          "conflict": 1
+        }
+      }
+    }
+  },
+  "leak_check": {
+    "tool_overlap": 0,
+    "quality_overlap": 0
+  }
+}
